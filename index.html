@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no,maximum-scale=1.0,minimum-scale=1.0">
+    <title>倒计时</title>
+    <style>
+        div {
+            margin: 200px;
+        }
+        span {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: #333;
+            font-size: 20px;
+            color: #fff;
+            text-align: center;
+            line-height: 40px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <span class="hour">1</span>
+        <span class="minute">2</span>
+        <span class="second">3</span>
+    </div>
+    <script>
+        var hour = document.querySelector('.hour');
+        var minute = document.querySelector('.minute');
+        var second = document.querySelector('.second');
+        var endtime = new Date('2021/3/13 17:00:00');   //  获取结束时间所有的毫秒数
+        countDown();    //先调用一次函数,以免出现刷新时效果不显示
+        setInterval(countDown,1000);    //设置定时器
+        function countDown() {
+            var nowtime = new Date();   //获取当前时间所有的毫秒数
+            // 结束时间减去当前时间，再转换日,时,分,秒
+            var remain = endtime.getTime() - nowtime.getTime();
+            // var d = Math.floor(remain/1000/60/60/24); //转换为天数
+            var h = Math.floor(remain/1000/60/60%24);  //转换为小时
+            h >= 10 ? h : h ='0' + h;   //单数前面加0
+            hour.innerHTML = h; //赋值
+            var m = Math.floor(remain/1000/60%60);  //转换为分钟
+            m >= 10 ? m : m ='0' + m;
+            minute.innerHTML = m;   
+            var s = Math.floor(remain/1000%60); //转换为秒
+            s >= 10 ? s : s ='0' + s;
+            second.innerHTML = s;
+        }
+    </script>
+</body>
+</html>
